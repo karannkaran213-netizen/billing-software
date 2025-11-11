@@ -1,0 +1,6 @@
+{
+    "version": 2,
+    "routes": [
+      { "src": "/(.*)", "dest": "restaurant-website/src/$1" }
+    ]
+  }
