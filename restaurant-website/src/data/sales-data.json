@@ -1,0 +1,69 @@
+{
+  "dailySales": [
+    {
+      "date": "2023-10-01",
+      "totalSales": 1500,
+      "itemsSold": [
+        { "item": "idly", "quantity": 50 },
+        { "item": "puttu", "quantity": 30 },
+        { "item": "poori", "quantity": 40 },
+        { "item": "coffee", "quantity": 60 },
+        { "item": "dosai", "quantity": 45 },
+        { "item": "vada pazhampori", "quantity": 25 }
+      ]
+    },
+    {
+      "date": "2023-10-02",
+      "totalSales": 1800,
+      "itemsSold": [
+        { "item": "idly", "quantity": 60 },
+        { "item": "puttu", "quantity": 40 },
+        { "item": "poori", "quantity": 50 },
+        { "item": "coffee", "quantity": 70 },
+        { "item": "dosai", "quantity": 55 },
+        { "item": "vada pazhampori", "quantity": 30 }
+      ]
+    }
+  ],
+  "monthlySales": [
+    {
+      "month": "October",
+      "year": 2023,
+      "totalSales": 33000,
+      "itemsSold": [
+        { "item": "idly", "quantity": 1200 },
+        { "item": "puttu", "quantity": 800 },
+        { "item": "poori", "quantity": 900 },
+        { "item": "coffee", "quantity": 1200 },
+        { "item": "dosai", "quantity": 1100 },
+        { "item": "vada pazhampori", "quantity": 600 }
+      ]
+    }
+  ],
+  "yearlySales": [
+    {
+      "year": 2023,
+      "totalSales": 400000,
+      "itemsSold": [
+        { "item": "idly", "quantity": 15000 },
+        { "item": "puttu", "quantity": 10000 },
+        { "item": "poori", "quantity": 12000 },
+        { "item": "coffee", "quantity": 15000 },
+        { "item": "dosai", "quantity": 14000 },
+        { "item": "vada pazhampori", "quantity": 8000 }
+      ]
+    }
+  ],
+  "expenses": [
+    {
+      "date": "2023-10-01",
+      "amount": 500,
+      "description": "Ingredients purchase"
+    },
+    {
+      "date": "2023-10-02",
+      "amount": 600,
+      "description": "Utilities"
+    }
+  ]
+}

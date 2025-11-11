@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sales Reports</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/reports.css">
+    <link rel="stylesheet" href="../css/graphs.css">
+</head>
+<body>
+    <header>
+        <h1>Sales Reports</h1>
+        <nav>
+            <ul>
+                <li><a href="menu.html">Menu</a></li>
+                <li><a href="cart.html">Cart</a></li>
+                <li><a href="billing.html">Billing</a></li>
+                <li><a href="manage-menu.html">Manage Menu</a></li>
+                <li><a href="reports.html">Reports</a></li>
+                <li><a href="graphs.html">Graphs</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section id="report-options">
+            <h2>Select Report Type</h2>
+            <button id="daily-report">Daily Sales Report</button>
+            <button id="monthly-report">Monthly Sales Report</button>
+            <button id="yearly-report">Yearly Sales Report</button>
+            <button id="profit-report">Profit Report</button>
+            <button id="loss-report">Loss Report</button>
+            <button id="expenses-report">Expenses Report</button>
+            <button id="custom-date-report">Custom Date Report</button>
+        </section>
+        <section id="report-results">
+            <h2>Report Results</h2>
+            <div id="report-content"></div>
+            <button id="download-pdf">Download PDF</button>
+            <button id="download-excel">Download Excel</button>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2023 Restaurant Name. All rights reserved.</p>
+    </footer>
+    <script src="../js/app.js"></script>
+    <script src="../js/reports.js"></script>
+</body>
+</html>

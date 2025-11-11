@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant Billing Dashboard</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2><i class="fas fa-utensils"></i> Restaurant POS</h2>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="#" class="nav-item active" data-page="dashboard">
+                    <i class="fas fa-chart-line"></i> Dashboard
+                </a>
+                <a href="#" class="nav-item" data-page="menu">
+                    <i class="fas fa-list"></i> Menu
+                </a>
+                <a href="#" class="nav-item" data-page="billing">
+                    <i class="fas fa-receipt"></i> Billing
+                </a>
+                <a href="#" class="nav-item" data-page="graphs">
+                    <i class="fas fa-chart-bar"></i> Graphs
+                </a>
+                <a href="#" class="nav-item" data-page="reports">
+                    <i class="fas fa-file-alt"></i> Reports
+                </a>
+                <a href="#" class="nav-item" data-page="manage-menu">
+                    <i class="fas fa-cog"></i> Manage Menu
+                </a>
+                <a href="#" class="nav-item" data-page="manage-expenses">
+                    <i class="fas fa-wallet"></i> Manage Expenses
+                </a>
+            </nav>
+            <div class="sidebar-footer">
+                <button id="clear-pages-menu-btn" class="logout-btn" style="background-color: #e74c3c; margin-bottom: 10px;">
+                    <i class="fas fa-trash"></i> Clear Pages Menu
+                </button>
+                <button id="logout-btn" class="logout-btn">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Top Header -->
+            <header class="top-header">
+                <div class="header-left">
+                    <h1 id="page-title">Dashboard</h1>
+                </div>
+                <div class="header-right">
+                    <div class="date-display">
+                        <i class="fas fa-calendar"></i>
+                        <span id="current-date"></span>
+                    </div>
+                    <div class="user-profile">
+                        <img src="https://via.placeholder.com/40" alt="User">
+                        <span id="user-name">User</span>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Dashboard Page -->
+            <div class="page-content active" id="dashboard-page">
+                <div class="dashboard-header">
+                    <h2>Welcome <span id="welcome-name">User</span></h2>
+                    <p id="last-updated">Last Updated: Just now</p>
+                </div>
+
+                <!-- KPI Cards -->
+                <div class="kpi-cards">
+                    <div class="kpi-card">
+                        <div class="kpi-header">
+                            <h3>Daily Sales</h3>
+                            <span class="kpi-badge success">+12.5%</span>
+                        </div>
+                        <div class="kpi-value">₹ <span id="daily-sales">0</span></div>
+                        <div class="kpi-subtitle">Today</div>
+                    </div>
+
+                    <div class="kpi-card">
+                        <div class="kpi-header">
+                            <h3>Monthly Sales</h3>
+                            <span class="kpi-badge success">+8.3%</span>
+                        </div>
+                        <div class="kpi-value">₹ <span id="monthly-sales">0</span></div>
+                        <div class="kpi-subtitle">This Month</div>
+                    </div>
+
+                    <div class="kpi-card">
+                        <div class="kpi-header">
+                            <h3>Profit</h3>
+                            <span class="kpi-badge success">+15.2%</span>
+                        </div>
+                        <div class="kpi-value">₹ <span id="profit">0</span></div>
+                        <div class="kpi-subtitle">This Month</div>
+                    </div>
+
+                    <div class="kpi-card">
+                        <div class="kpi-header">
+                            <h3>Expenses</h3>
+                            <span class="kpi-badge warning">+5.1%</span>
+                        </div>
+                        <div class="kpi-value">₹ <span id="expenses">0</span></div>
+                        <div class="kpi-subtitle">This Month</div>
+                    </div>
+                </div>
+
+                <!-- Charts Row 1 -->
+                <div class="charts-row">
+                    <div class="chart-card">
+                        <h3>Daily Sales Trend</h3>
+                        <div class="chart-container">
+                            <canvas id="dailySalesChart"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="chart-card">
+                        <h3>Sales by Items</h3>
+                        <div class="chart-container">
+                            <canvas id="itemsSalesChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Charts Row 2 -->
+                <div class="charts-row">
+                    <div class="chart-card">
+                        <h3>Monthly Sales Comparison</h3>
+                        <div class="chart-container">
+                            <canvas id="monthlySalesChart"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="chart-card">
+                        <h3>Sales Distribution</h3>
+                        <div class="chart-container">
+                            <canvas id="distributionChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Outstanding Summary -->
+                <div class="summary-section">
+                    <div class="summary-card">
+                        <h3>Sales Outstanding</h3>
+                        <div class="outstanding-list">
+                            <div class="outstanding-item">
+                                <span class="label">Total Receivables</span>
+                                <span class="amount green">₹ <span id="total-receivables">0</span></span>
+                            </div>
+                            <div class="outstanding-item">
+                                <span class="label">Overdue</span>
+                                <span class="amount red">₹ <span id="overdue">0</span></span>
+                            </div>
+                            <div class="outstanding-item">
+                                <span class="label">Current</span>
+                                <span class="amount orange">₹ <span id="current">0</span></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="summary-card">
+                        <h3>Purchase Outstanding</h3>
+                        <div class="outstanding-list">
+                            <div class="outstanding-item">
+                                <span class="label">Total Payables</span>
+                                <span class="amount green">₹ <span id="total-payables">0</span></span>
+                            </div>
+                            <div class="outstanding-item">
+                                <span class="label">Overdue</span>
+                                <span class="amount red">₹ <span id="payables-overdue">0</span></span>
+                            </div>
+                            <div class="outstanding-item">
+                                <span class="label">Current</span>
+                                <span class="amount orange">₹ <span id="payables-current">0</span></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Menu Page -->
+            <div class="page-content" id="menu-page">
+                <div class="page-header">
+                    <h2>Menu Items</h2>
+                </div>
+                <div id="menu-container" class="menu-grid">
+                    <!-- Menu items will be loaded here -->
+                </div>
+            </div>
+
+            <!-- Billing Page -->
+            <div class="page-content" id="billing-page">
+                <div class="page-header">
+                    <h2>Billing</h2>
+                </div>
+                <div class="billing-section">
+                    <div class="bill-left">
+                        <div id="cart-container" class="cart-items">
+                            <!-- Cart items will be added here -->
+                        </div>
+                    </div>
+                    <div class="bill-right">
+                        <div class="bill-summary">
+                            <h3>Bill Summary</h3>
+                            <div class="summary-item">
+                                <span>Subtotal:</span>
+                                <span id="subtotal">₹0</span>
+                            </div>
+                            <div class="summary-item">
+                                <span>Tax (5%):</span>
+                                <span id="tax">₹0</span>
+                            </div>
+                            <div class="summary-item total">
+                                <span>Total:</span>
+                                <span id="bill-total">₹0</span>
+                            </div>
+                            <button id="pay-now-btn" class="btn btn-primary">Pay Now</button>
+                            <button id="print-bill-btn" class="btn btn-secondary">Print Bill</button>
+                            <button id="clear-cart-btn" class="btn btn-danger">Clear Cart</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Graphs Page -->
+            <div class="page-content" id="graphs-page">
+                <div class="page-header">
+                    <h2>Analytics Graphs</h2>
+                </div>
+                <div class="graphs-container">
+                    <div class="graph-card">
+                        <h3>Daily Sales & Items</h3>
+                        <canvas id="graphDaily"></canvas>
+                    </div>
+                    <div class="graph-card">
+                        <h3>Monthly Sales & Items</h3>
+                        <canvas id="graphMonthly"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Reports Page -->
+            <div class="page-content" id="reports-page">
+                <div class="page-header">
+                    <h2>Sales Reports</h2>
+                    <div class="report-filters">
+                        <input type="date" id="start-date" class="filter-input">
+                        <input type="date" id="end-date" class="filter-input">
+                        <button id="filter-btn" class="btn btn-primary">Filter</button>
+                    </div>
+                </div>
+                <div class="reports-section">
+                    <button class="report-btn" data-report="daily">Daily Report</button>
+                    <button class="report-btn" data-report="monthly">Monthly Report</button>
+                    <button class="report-btn" data-report="yearly">Yearly Report</button>
+                    <button class="report-btn" data-report="profit">Profit Report</button>
+                    <button class="report-btn" data-report="loss">Loss Report</button>
+                    <button class="report-btn" data-report="expenses">Expenses Report</button>
+                </div>
+                <div id="report-content" class="report-content">
+                    <!-- Report data will be displayed here -->
+                </div>
+                <div class="report-actions">
+                    <button id="download-pdf" class="btn btn-primary">Download PDF</button>
+                    <button id="download-excel" class="btn btn-secondary">Download Excel</button>
+                </div>
+            </div>
+
+            <!-- Manage Menu Page -->
+            <div class="page-content" id="manage-menu-page">
+                <div class="page-header">
+                    <h2>Manage Menu Items</h2>
+                    <div class="d-flex" style="gap:10px;">
+                        <button id="add-item-btn" class="btn btn-primary">+ Add Item</button>
+                        <button id="clear-data-btn" class="btn btn-danger">Clear All Data</button>
+                    </div>
+                </div>
+                <div id="manage-menu-container" class="menu-management">
+                    <!-- Manage menu items here -->
+                </div>
+            </div>
+
+            <!-- Manage Expenses Page -->
+            <div class="page-content" id="manage-expenses-page">
+                <div class="page-header">
+                    <h2>Manage Expenses</h2>
+                    <div class="d-flex" style="gap:10px;">
+                        <button id="add-expense-btn" class="btn btn-primary">+ Add Expense</button>
+                        <button id="clear-expenses-btn" class="btn btn-danger">Clear Expenses</button>
+                    </div>
+                </div>
+                <div id="manage-expenses-container" class="expenses-management">
+                    <!-- Expenses will be listed here -->
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Add/Edit Expense Modal -->
+    <div id="expense-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2 id="expense-modal-title">Add Expense</h2>
+            <form id="expense-form">
+                <div class="form-group">
+                    <label for="expense-type">Expense Type</label>
+                    <input type="text" id="expense-type" required>
+                </div>
+                <div class="form-group">
+                    <label for="expense-amount">Amount (₹)</label>
+                    <input type="number" id="expense-amount" step="0.01" required>
+                </div>
+                <div class="form-group">
+                    <label for="expense-date">Date</label>
+                    <input type="date" id="expense-date" required>
+                </div>
+                <div class="form-group">
+                    <label for="expense-notes">Notes</label>
+                    <textarea id="expense-notes" rows="3"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Save Expense</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- QR Code Modal -->
+    <div id="qr-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Scan to Pay</h2>
+            <div id="qr-code-display"></div>
+            <p id="qr-amount"></p>
+        </div>
+    </div>
+
+    <!-- Add/Edit Menu Modal -->
+    <div id="menu-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2 id="modal-title">Add Menu Item</h2>
+            <form id="menu-form">
+                <div class="form-group">
+                    <label for="item-name">Item Name</label>
+                    <input type="text" id="item-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="item-price">Price (₹)</label>
+                    <input type="number" id="item-price" step="0.01" required>
+                </div>
+                <div class="form-group">
+                    <label for="item-image">Image URL</label>
+                    <input type="text" id="item-image" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Save Item</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/utils.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/menu.js"></script>
+    <script src="js/billing.js"></script>
+    <script src="js/graphs.js"></script>
+    <script src="js/reports.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

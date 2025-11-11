@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sales Graphs</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/graphs.css">
+    <script src="../js/utils.js" defer></script>
+    <script src="../js/graphs.js" defer></script>
+</head>
+<body>
+    <header>
+        <h1>Sales Graphs</h1>
+        <nav>
+            <ul>
+                <li><a href="menu.html">Menu</a></li>
+                <li><a href="cart.html">Cart</a></li>
+                <li><a href="billing.html">Billing</a></li>
+                <li><a href="manage-menu.html">Manage Menu</a></li>
+                <li><a href="reports.html">Reports</a></li>
+                <li><a href="graphs.html">Graphs</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section id="daily-sales">
+            <h2>Daily Sales</h2>
+            <canvas id="dailySalesChart"></canvas>
+        </section>
+        <section id="monthly-sales">
+            <h2>Monthly Sales</h2>
+            <canvas id="monthlySalesChart"></canvas>
+        </section>
+        <section id="item-sales">
+            <h2>Item Sales</h2>
+            <canvas id="itemSalesChart"></canvas>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2023 Restaurant Name. All rights reserved.</p>
+    </footer>
+</body>
+</html>

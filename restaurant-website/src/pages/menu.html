@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant Menu</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/menu.css">
+    <script src="../js/menu.js" defer></script>
+</head>
+<body>
+    <header>
+        <h1>Restaurant Menu</h1>
+        <nav>
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="cart.html">Cart</a></li>
+                <li><a href="billing.html">Billing</a></li>
+                <li><a href="manage-menu.html">Manage Menu</a></li>
+                <li><a href="reports.html">Reports</a></li>
+                <li><a href="graphs.html">Graphs</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section id="menu-items">
+            <h2>Our Menu</h2>
+            <div class="menu-item" id="idly">
+                <img src="../images/idly.jpg" alt="Idly">
+                <h3>Idly</h3>
+                <p>Price: $2.00</p>
+                <button onclick="addToCart('Idly', 2.00)">Add to Cart</button>
+            </div>
+            <div class="menu-item" id="puttu">
+                <img src="../images/puttu.jpg" alt="Puttu">
+                <h3>Puttu</h3>
+                <p>Price: $2.50</p>
+                <button onclick="addToCart('Puttu', 2.50)">Add to Cart</button>
+            </div>
+            <div class="menu-item" id="poori">
+                <img src="../images/poori.jpg" alt="Poori">
+                <h3>Poori</h3>
+                <p>Price: $3.00</p>
+                <button onclick="addToCart('Poori', 3.00)">Add to Cart</button>
+            </div>
+            <div class="menu-item" id="coffee">
+                <img src="../images/coffee.jpg" alt="Coffee">
+                <h3>Coffee</h3>
+                <p>Price: $1.50</p>
+                <button onclick="addToCart('Coffee', 1.50)">Add to Cart</button>
+            </div>
+            <div class="menu-item" id="dosai">
+                <img src="../images/dosai.jpg" alt="Dosai">
+                <h3>Dosai</h3>
+                <p>Price: $2.75</p>
+                <button onclick="addToCart('Dosai', 2.75)">Add to Cart</button>
+            </div>
+            <div class="menu-item" id="vada-pazhampori">
+                <img src="../images/vada-pazhampori.jpg" alt="Vada Pazhampori">
+                <h3>Vada Pazhampori</h3>
+                <p>Price: $3.50</p>
+                <button onclick="addToCart('Vada Pazhampori', 3.50)">Add to Cart</button>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2023 Restaurant Name. All rights reserved.</p>
+    </footer>
+</body>
+</html>

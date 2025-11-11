@@ -1,0 +1,20 @@
+{
+  "name": "restaurant-website",
+  "version": "1.0.0",
+  "description": "A simple restaurant website with menu, billing, and reporting features.",
+  "main": "src/index.html",
+  "scripts": {
+    "start": "live-server src",
+    "build": "echo 'Build process not defined'",
+    "test": "echo 'No tests defined'"
+  },
+  "dependencies": {
+    "chart.js": "^3.7.0",
+    "jquery": "^3.6.0"
+  },
+  "devDependencies": {
+    "live-server": "^1.2.1"
+  },
+  "author": "Your Name",
+  "license": "MIT"
+}

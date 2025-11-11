@@ -1,0 +1,40 @@
+{
+  "menuItems": [
+    {
+      "id": 1,
+      "name": "Idly",
+      "price": 30,
+      "image": "images/idly.jpg"
+    },
+    {
+      "id": 2,
+      "name": "Puttu",
+      "price": 40,
+      "image": "images/puttu.jpg"
+    },
+    {
+      "id": 3,
+      "name": "Poori",
+      "price": 35,
+      "image": "images/poori.jpg"
+    },
+    {
+      "id": 4,
+      "name": "Coffee",
+      "price": 20,
+      "image": "images/coffee.jpg"
+    },
+    {
+      "id": 5,
+      "name": "Dosai",
+      "price": 50,
+      "image": "images/dosai.jpg"
+    },
+    {
+      "id": 6,
+      "name": "Vada Pazhampori",
+      "price": 25,
+      "image": "images/vada_pazhampori.jpg"
+    }
+  ]
+}
